@@ -26,7 +26,7 @@ FedPilot streamlines the setup process through a Make-based command-line interfa
 
 ```bash
 make setup
-````
+```
 
 This command performs dependency checks and creates all required directories.
 
