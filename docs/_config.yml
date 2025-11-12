@@ -9,7 +9,7 @@ mermaid:
   version: "10.1.0" 
 
 url: "https://fedpilot.github.io"
-baseurl: "/documents"
+baseurl: ""
                   
 
 plugins:
