@@ -1,0 +1,27 @@
+name: CI (docs/)
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - run: |
+          bundle install --path vendor/bundle || true
+          if [ -f Gemfile ]; then bundle exec jekyll build -d _site; else jekyll build -d _site; fi
+      

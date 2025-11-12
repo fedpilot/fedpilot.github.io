@@ -1,0 +1,16 @@
+# docs/_config.yml
+title: FedPilot Wiki
+description: Documentation for FedPilot
+logo: assets/images/fedpilot_logo.jpeg
+theme: just-the-docs
+color_scheme: light
+permalink: pretty
+mermaid:
+  version: "10.1.0" 
+
+url: "https://fedpilot.github.io"
+baseurl: "/documents"
+                  
+
+plugins:
+  - jekyll-redirect-from
