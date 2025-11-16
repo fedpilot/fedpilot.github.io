@@ -154,9 +154,9 @@ The framework includes built-in support for several benchmark datasets:
 
 1. Review [Installation]({{ site.baseurl }}/requirements-and-installation) for setup
 2. Read [Getting Started]({{ site.baseurl }}/getting-started) for first training
-3. Explore [Architecture Overview]({{ site.baseurl }}/architecture/overview) for system design
+3. Explore [Framework Overview]({{ site.baseurl }}/fedpilot-framework-overview) for system design
 4. Check [Examples]({{ site.baseurl }}/examples/basic-training) for practical implementations
-5. Visit [GitHub Repository](https://github.com/fedpilot/core) for source code
+5. Visit [GitHub Repository](https://github.com/fedpilot) for source code
 
 ---
 
