@@ -147,7 +147,7 @@ python -c "import torch; print(f'PyTorch: {torch.__version__}')"
 python -c "import ray; ray.init(); print('Ray initialized successfully')"
 python -c "import transformers; print(f'Transformers: {transformers.__version__}')"
 
-# Check CUDA availability (if GPU)
+# Check CUDA availability (if you are using a GPU)
 python -c "import torch; print(f'CUDA Available: {torch.cuda.is_available()}')"
 python -c "import torch; print(f'GPU Count: {torch.cuda.device_count()}')"
 ```
