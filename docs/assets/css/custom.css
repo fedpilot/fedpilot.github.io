@@ -1,0 +1,82 @@
+a {
+  color: #007acc;
+}
+
+.highlight {
+  border-radius: 8px;
+}
+
+body {
+  background-color: #f8fafc;
+}
+
+.main-content {
+  max-width: 950px;
+  margin: 0 auto;
+  animation: fadeInUp 0.25s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Sidebar nav links: always a single line --- */
+.nav-list .nav-list-link {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.35rem;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    padding-left 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.nav-list .nav-list-link:hover {
+  background-color: #e0f2fe;
+  padding-left: 1rem;
+  box-shadow: 0 0 0 1px #bfdbfe;
+}
+
+.nav-list .nav-list-item > .nav-list-link.active {
+  background-color: #dbeafe;
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 0 #2563eb;
+}
+
+
+.nav-list-expander svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-right: 0.1rem;
+  transform-origin: center;
+  transition: transform 0.15s ease;
+}
+
+.nav-list-item.active > .nav-list-expander svg {
+  transform: rotate(90deg);
+}
+
+.nav-list-item > .nav-list {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.2s ease-out,
+    opacity 0.2s ease-out;
+}
+
+.nav-list-item.active > .nav-list {
+  max-height: 500px;
+  opacity: 1;
+}
