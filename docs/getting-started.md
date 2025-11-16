@@ -40,12 +40,12 @@ make train
 
 **Example Output**:
 
-
+```bash
 🚀 FedPilot - Training Mode
 ========================================================
 ✓ Found 796 configuration(s) - Starting interactive navigation...
 
-make[1]: Entering directory '/home/Disquiet/Desktop/fed/core'
+make[1]: Entering directory '/fed/core'
 📁 Current directory: templates
 
 1. 📂 bert/
@@ -431,6 +431,6 @@ number_of_clients: 2
 ---
 
 
-**Ready to dive deeper?** Check out the [Configuration Guide]({{ site.baseurl }}/configuration-guide) or [Architecture Overview]({{ site.baseurl }}/architecture/overview)
+**Ready to dive deeper?** Check out the [Configuration Guide]({{ site.baseurl }}/configuration-guide)
 {: .text-center }
 
