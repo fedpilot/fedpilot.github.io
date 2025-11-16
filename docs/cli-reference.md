@@ -72,16 +72,6 @@ make quick-train
 ```
 
 **Use When**: You have a configuration file ready and want to start immediately.
-
-**Example**:
-```bash
-# First, prepare your config
-cp templates/lenet/label-20/encryption-free/fl.yaml config.yaml
-
-# Then run
-make quick-train
-```
-
 #### `make run`
 Execute training with current configuration (lowest-level training command).
 
@@ -631,8 +621,7 @@ make plot
 
 - **[Getting Started]({{ site.baseurl }}/getting-started)**: Quick start guide
 - **[Configuration Guide]({{ site.baseurl }}/configuration-guide)**: Config reference
-- **[Monitoring Guide]({{ site.baseurl }}/guides/monitoring-and-tracing)**: Advanced monitoring
-- **[Troubleshooting]({{ site.baseurl }}/getting-started#-troubleshooting)**: Common issues
+- **[Troubleshooting]({{ site.baseurl }}/getting-started#troubleshooting)**: Common issues
 
 ---
 
