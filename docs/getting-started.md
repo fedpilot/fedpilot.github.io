@@ -25,7 +25,7 @@ Before running FedPilot, make sure your environment meets the hardware and softw
 FedPilot streamlines the setup process through a Make-based command-line interface. Begin by verifying your environment with:
 
 ```bash
-make setup
+make validate-setup
 ```
 
 This command performs dependency checks and creates all required directories.
@@ -38,21 +38,45 @@ Once setup is complete, initiate the interactive training session with:
 make train
 ```
 
+
+<details markdown="1">
+<summary><strong>Show example interactive output and explanation</strong></summary>
+
 **Example Output**:
 
 ```bash
-🚀 FedPilot - Training Mode
+Configuration browser
 ========================================================
-✓ Found 796 configuration(s) - Starting interactive navigation...
+Found 796 configuration(s)
 
-make[1]: Entering directory '/fed/core'
-📁 Current directory: templates
 
-1. 📂 bert/
-2. 📂 cnn/
-3. 📂 enhanced_chunking/
-4. 📂 lenet/
-5. 📂 mobilenet/
+Choose mode: [prod/dev]
+Enter mode (default: dev): dev
+
+Detected 1 GPU(s).
+Choose device: [cpu/gpu]
+Enter device type (default: gpu): gpu
+Current directory: templates
+
+1. bert
+2. cnn
+3. enhanced_chunking
+4. lenet
+5. mobilenet
+6. others
+7. resnet18
+8. resnet50
+9. vgg16
+
+Enter your choice (1-9) or 'q' to quit: 2
+
+Current directory: templates/cnn
+
+1. [Go back]
+2. dir
+3. label-100
+4. label-20
+5. label-30
 ...
 ```
 
@@ -65,9 +89,15 @@ This command launches an interactive configuration browser that guides you throu
 
 The interactive system is designed to be beginner-friendly while providing access to all of FedPilot's advanced features.
 
+</details>
+
 ### Configuration Files
 
 Configuration files like `config.yaml` that is created during the `make train` process contain all the necessary parameters to run your experiments. The example below shows a simplified version of what a configuration file contains:
+
+
+<details markdown="1">
+<summary><strong>Show example configuration</strong></summary>
 
 ```yaml
 device: cpu
@@ -79,7 +109,7 @@ federated_learning_topology: 'k_connect'
 adjacency_matrix_file_name: 'adjacency_matrix_2.csv'
 client_k_neighbors: 2
 client_role: 'train'
-placement_group_strategy: 'PLACEMENT_GROUP_SPREAD'
+placement_group_strategy: 'SPREAD'
 
 random_seed: 42
 
@@ -102,6 +132,8 @@ aggregation_strategy: "FedAvg"
 fed_avg: true
 ```
 
+</details>
+
 ### Understanding Configurations
 
 Configurations are YAML files in the `templates/` directory. They define:
@@ -113,16 +145,6 @@ Configurations are YAML files in the `templates/` directory. They define:
 * **Optimization**: Aggregation strategies and parameters
 
 You can modify these configuration files manually or create your own custom configurations. FedPilot includes validation checks that run before training sessions begin, which helps prevent configuration errors and ensures your experiments start with valid parameters.
-
-> Note: For the time being, you need to manually add `placement_group_strategy` in the configuration file.
-
-### Quick Training
-
-If you already have a configuration file from a previous session, use the quick training mode to start immediately:
-
-```bash
-make quick-train
-```
 
 ### Run with Current Configuration
 
@@ -136,39 +158,13 @@ make run
 
 ## Configuration Management
 
-### Browse Available Configurations
+### Create a configuration from template
 
 Explore available configuration templates without starting training:
 
 ```bash
 make config
 ```
-
-### Validate Configuration
-
-Check your current configuration for errors:
-
-```bash
-make validate
-```
-
-**Example Output**:
-
-```bash
-✅ Configuration Validation
-========================================================
-✓ Configuration file exists
-Validating YAML syntax...
-✓ Valid YAML syntax
-Checking required fields...
-  ✓ device: cpu
-  ✓ random_seed: 42
-  ✓ learning_rate: 0.001
-  ✓ model_type: cnn
-  ...
-  🎉 Configuration validation complete!
-```
-
 ### View Current Configuration
 
 Display the active configuration:
@@ -177,13 +173,118 @@ Display the active configuration:
 make show-config
 ```
 
+### Show grouped summary of template families
+You can view a categorized list of available configuration templates:
+
+```bash
+make config-summary 
+```
+
+<details markdown="1">
+<summary><strong>Show example output of config-summary</strong></summary>
+
+```bash
+Available configuration templates
+========================================================
+Root directory: templates
+Total templates: 796
+
+bert - 1 templates
+    examples: bert_fl.yaml
+
+cnn - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+enhanced_chunking - 1 templates
+    examples: config.yaml
+
+lenet - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+mobilenet - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+others - 2 templates
+    examples: shapley_lenet_test.yaml, test.yaml
+
+resnet18 - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+resnet50 - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+vgg16 - 132 templates
+    examples: cfl-coordinate-dp.yaml, cfl-cosine-dp.yaml, cfl-cosine-grads-dp.yaml
+
+Use 'make config' to browse and select a specific template interactively.
+```
+</details>
+
+### List All Available Configurations
+You can list all available configuration templates in the `templates/` directory (uses less command):
+
+```bash
+make list-configs
+``` 
+
+### Validate Configuration
+
+You can also validate a configuration file. This includes checking for required fields, as well as the dataset and model compatibility:
+
+```bash
+make validate-config
+```
+
+
+<details markdown="1">
+<summary><strong>Show example validation output and common errors</strong></summary>
+
+**Example Output**:
+
+```bash
+Validating config.yaml
+========================================================
+Validating config: /home/Disquiet/Desktop/fed/core/config.yaml
+Checks:
+  1) YAML parsing and default loading via yaml_loader
+  2) Semantic validation using ConfigValidator
+  3) Required field presence and missing-field warnings
+  4) Model and dataset modality compatibility
+
+Step 1/4: YAML parsing and default loading ... ok
+Step 2/4: semantic validation (ConfigValidator) ... using default value for `SENSITIVITY_PERCENTAGE` which is 100
+ok
+Step 3/4: checking required fields and defaults ... ok (with warnings)
+[WARN] The following fields are missing from config.yaml; framework defaults will be used:
+  - aggregation_sample_scaling
+  - client_k_neighbors
+  - gpu_index
+  - shapley
+  - shapley_type
+  - use_global_accuracy_for_noniid
+  Consider running 'make fill-config' to write these defaults into the file.
+Step 4/4: model/dataset modality check ... ok
+
+Config validation complete.
+Summary:
+  model_type:                 'cnn'
+  dataset_type:               'fmnist'
+  federated_learning_schema:  'DecentralizedFederatedLearning'
+  federated_learning_topology:'ring'
+
+```
+
+</details>
+
+
+
 ### Session Management
 
 FedPilot automatically creates tmux sessions for long-running experiments to ensure they continue running even if you disconnect. You can manage these sessions using:
 
 ```bash
 # 1. View active sessions
-make sessions
+make sessions (Currently unavailable)
 
 # 2. List all available sessions
 tmux list-sessions             
@@ -200,40 +301,6 @@ tmux kill-session -t fl-resnet-cifar-12345
 
 ---
 
-## Supported Models and Datasets
-
-### Models
-
-| Model     | Type  | Params | Use Case                  |
-| --------- | ----- | ------ | ------------------------- |
-| CNN       | Image | ~200K  | Quick testing, baseline   |
-| LeNet     | Image | ~60K   | Fast training, embedded   |
-| ResNet-18 | Image | ~11M   | Standard baseline         |
-| ResNet-50 | Image | ~25M   | Realistic tasks           |
-| VGG-16    | Image | ~138M  | Large-scale tasks         |
-| MobileNet | Image | ~4M    | Edge devices, compression |
-| ViT-Small | Image | ~22M   | Vision transformers       |
-| BERT      | NLP   | ~110M  | Language tasks            |
-
-### Datasets
-
-| Dataset       | Type  | Classes | Samples       |
-| ------------- | ----- | ------- | ------------- |
-| MNIST         | Image | 10      | 70K           |
-| Fashion-MNIST | Image | 10      | 70K           |
-| CIFAR-10      | Image | 10      | 60K           |
-| CIFAR-100     | Image | 100     | 60K           |
-| FMNIST        | Image | 10      | 70K           |
-| Shakespeare   | Text  | 80      | 4M characters |
-| BBC News      | Text  | 5       | 2.2K docs     |
-
-### Data Distribution Levels
-
-* IID (Uniform): All clients have same class distribution
-* 20/50/90: Non-IID level (lower = more heterogeneous)
-* Dir (Dirichlet): Beta parameter controls distribution
-
----
 
 ## Configuration Selection Guide
 
@@ -289,44 +356,111 @@ tmux kill-session -t fl-resnet-cifar-12345
 * Characteristics: Multiple clustering rounds with detailed analysis output
 * Research Value: Insights into data distribution and client relationships
 
+<details markdown="1">
+<summary><strong>Show supported models, datasets, and distribution levels</strong></summary>
+
+### Models
+
+| Model     | Type  | Params | Use Case                  |
+| --------- | ----- | ------ | ------------------------- |
+| CNN       | Image | ~200K  | Quick testing, baseline   |
+| LeNet     | Image | ~60K   | Fast training, embedded   |
+| ResNet-18 | Image | ~11M   | Standard baseline         |
+| ResNet-50 | Image | ~25M   | Realistic tasks           |
+| VGG-16    | Image | ~138M  | Large-scale tasks         |
+| MobileNet | Image | ~4M    | Edge devices, compression |
+| ViT-Small | Image | ~22M   | Vision transformers       |
+| BERT      | NLP   | ~110M  | Language tasks            |
+
+### Datasets
+
+| Dataset       | Type  | Classes | Samples       |
+| ------------- | ----- | ------- | ------------- |
+| MNIST         | Image | 10      | 70K           |
+| Fashion-MNIST | Image | 10      | 70K           |
+| CIFAR-10      | Image | 10      | 60K           |
+| CIFAR-100     | Image | 100     | 60K           |
+| FMNIST        | Image | 10      | 70K           |
+| Shakespeare   | Text  | 80      | 4M characters |
+| BBC News      | Text  | 5       | 2.2K docs     |
+
+### Data Distribution Levels
+
+* IID (Uniform): All clients have same class distribution
+* 20/50/90: Non-IID level (lower = more heterogeneous)
+* Dir (Dirichlet): Beta parameter controls distribution
+
+</details>
+
 ---
 
 ## Monitoring and Analysis
 
 ### Training Logs
 
-Access training logs and outputs to monitor your experiment's progress in real-time:
+Access training logs:
 
 ```bash
 make logs
 ```
 
-**Example Output**:
+<details markdown="1">
+<summary><strong>Show example log output and explanation</strong></summary>
 
 ```bash
-2025/11/06 19:58:46,     INFO | Logger object created successfully...
-2025/11/06 19:58:46,  WARNING | The ./logs/cnn/cosine/Model=cnn-Datase
+FedPilot training logs and metrics
+========================================================
+
+Available runs:
+  1) run_20251207_183858
+  0) Cancel
+Select a run [0-1]: 1
+
+Selected run: logs/run_20251207_183858
+
+Contents of this run directory:
+client-0-communication-metrics.csv  client-3-round-metrics.csv          client-7-memory-metrics.csv
+client-0-convergence-metrics.csv    client-3-system-metrics.csv         client-7-performance-metrics.csv
+client-0-memory-metrics.csv         client-4-communication-metrics.csv  client-7-round-metrics.csv
+client-0-performance-metrics.csv    client-4-convergence-metrics.csv    client-7-system-metrics.csv
+client-0-round-metrics.csv          client-4-memory-metrics.csv         client-8-communication-metrics.csv
+client-0-system-metrics.csv         client-4-performance-metrics.csv    client-8-convergence-metrics.csv
+client-1-communication-metrics.csv  client-4-round-metrics.csv          client-8-memory-metrics.csv
+client-1-memory-metrics.csv         client-4-system-metrics.csv         client-8-performance-metrics.csv
+client-1-performance-metrics.csv    client-5-communication-metrics.csv  client-8-round-metrics.csv
+client-1-round-metrics.csv          client-5-convergence-metrics.csv    client-8-system-metrics.csv
+client-1-system-metrics.csv         client-5-memory-metrics.csv         client-9-communication-metrics.csv
+client-2-communication-metrics.csv  client-5-performance-metrics.csv    client-9-memory-metrics.csv
+client-2-convergence-metrics.csv    client-5-round-metrics.csv          client-9-performance-metrics.csv
+client-2-memory-metrics.csv         client-5-system-metrics.csv         client-9-round-metrics.csv
+client-2-performance-metrics.csv    client-6-communication-metrics.csv  client-9-system-metrics.csv
+client-2-round-metrics.csv          client-6-memory-metrics.csv         config.yaml
+client-2-system-metrics.csv         client-6-performance-metrics.csv    topology-manager-memory-metrics.csv
+client-3-communication-metrics.csv  client-6-round-metrics.csv          topology-manager-performance-metrics.csv
+client-3-convergence-metrics.csv    client-6-system-metrics.csv         topology-manager-system-metrics.csv
+client-3-memory-metrics.csv         client-7-communication-metrics.csv
+client-3-performance-metrics.csv    client-7-convergence-metrics.csv
+
+Metric groups available:
+  1) Client metrics
+  2) Topology-manager metrics
+  0) Cancel
+Select metric group [0-2]: 
 ```
 
-### Experiment Results
-
-```bash
-make experiments
-```
-
-### Saved Models
-
-```bash
-make models
-```
+</details>
 
 ### Ray Dashboard Monitoring
 
-Ray dashboard typically runs on `http://localhost:8265`.
+Ray dashboard runs on `http://localhost:8266`.
 
 ---
 
 ## Troubleshooting
+
+<details markdown="1">
+<summary><strong>Show troubleshooting guide</strong></summary>
+
 
 ### Common Issues
 
@@ -426,7 +560,7 @@ test_batch_size: 16
 number_of_clients: 2
 ```
 
-
+</details>
 
 ---
 
