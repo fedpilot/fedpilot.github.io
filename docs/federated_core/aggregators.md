@@ -1,3 +1,8 @@
+---
+title: Aggregators
+layout: default
+parent: Federated Core & Communication
+---
 # Aggregation Strategies
 
 The Aggregator is the mathematical core of the federated synchronization step. It dictates exactly how divergent client weights are mathematically fused into a consensus model.
@@ -87,3 +92,4 @@ For the four registries that **do** use decorator-based discovery, see the [Regi
 ---
 
 See also: [Inter-Cluster Ray Fabric (ICRF)](icrf.md) for how data-driven placement reduces the non-IID problem at the infrastructure level before aggregation even runs.
+

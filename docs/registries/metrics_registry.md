@@ -1,3 +1,8 @@
+---
+title: Metrics Registry
+layout: default
+parent: Tool Registries
+---
 # Metrics Registry
 
 The Metrics Registry (`src/registries/metrics/metric_registry.py`) is the plugin system for custom telemetry. FedPilot treats observability as a first-class citizen; all built-in metrics (round, memory, communication, convergence, throughput, system, availability, performance) are registered using the exact same pattern exposed to researchers.
@@ -64,3 +69,4 @@ The framework ships with the following metric categories, each living in its own
 All collected metrics are seamlessly routed through the `MetricsActor` to prevent blocking the main training loop with I/O operations.
 
 See also: [Metrics Exporting](../dashboards_and_telemetry/metrics_exporting.md) · [Streamlit Dashboard](../dashboards_and_telemetry/streamlit_dashboard.md)
+

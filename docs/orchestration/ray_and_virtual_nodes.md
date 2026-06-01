@@ -1,3 +1,8 @@
+---
+title: Ray And Virtual Nodes
+layout: default
+parent: Orchestration & Infrastructure
+---
 # Ray & Virtual Nodes
 
 FedPilot achieves massive scalability by treating physical hardware as fluid resources via **Ray**. Instead of tying a client directly to a thread or process, the framework uses a lazy-evaluation pattern called `VirtualNode`.
@@ -80,3 +85,4 @@ In multi-cluster (ICRF) mode, virtual nodes do not all materialize on the same R
 This means the lazy materialization pattern and the ICRF work together: nodes consume resources only when needed, and only on the cluster where they actually run.
 
 See also: [Federated Base](../federated_core/federated_base.md) · [Inter-Cluster Ray Fabric (ICRF)](../federated_core/icrf.md)
+

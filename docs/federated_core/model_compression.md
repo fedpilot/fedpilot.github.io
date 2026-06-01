@@ -1,3 +1,8 @@
+---
+title: Model Compression
+layout: default
+parent: Federated Core & Communication
+---
 # Model Compression & Chunking
 
 FedPilot implements a gradient-guided model compression system called **Chunking** (`src/core/pruning/` and `src/applications/torrent/`). It dramatically reduces the communication bandwidth needed per federation round by transmitting only the most important slices of the model.
@@ -57,3 +62,4 @@ The `ChunkAnalyzer` class (`src/applications/torrent/chunk_analyzer.py`) provide
 - `get_chunk_importance_distribution(client, config)` — statistical summary of importance scores per chunk
 
 These tools are invaluable for understanding communication efficiency in your experiments.
+

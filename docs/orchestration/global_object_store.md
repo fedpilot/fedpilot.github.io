@@ -1,3 +1,8 @@
+---
+title: Global Object Store
+layout: default
+parent: Orchestration & Infrastructure
+---
 # Global Object Store
 
 Transmitting deep neural network weights over a network is expensive. A ResNet-50 state dict is ~100MB. Passing 100MB dictionaries through Ray's message queue on every round is both slow (serialization overhead) and dangerous (memory bloat that crashes actors).
@@ -93,3 +98,4 @@ For example: `"my_experiment/client_7/round_42"`. This namespacing prevents key 
 In multi-cluster (ICRF) mode, each Ray cluster runs its own `GlobalObjectStore` instance. Weights that cross cluster boundaries travel via the `HybridClusterGateway` HTTP endpoint (pickled in the message payload), **not** through the shared object store. The object store is an intra-cluster optimization only.
 
 See also: [Topology Manager](topology_manager.md) · [Inter-Cluster Ray Fabric (ICRF)](../federated_core/icrf.md)
+

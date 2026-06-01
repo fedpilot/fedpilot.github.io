@@ -1,3 +1,8 @@
+---
+title: Configuration Reference
+layout: default
+parent: Entry & Configuration
+---
 # Configuration Reference
 
 The `config.yaml` file acts as the ultimate source of truth for a FedPilot experiment. It defines the ML models, the federated schemas, network topologies, and privacy constraints.
@@ -66,3 +71,4 @@ dp_epsilon: 1.0                        # Lower is more private
 
 ### Telemetry & Dashboard Integration
 See [Layer 6](../security_and_privacy/differential_privacy.md) for deep-dive DP tuning guides and [Layer 7](../dashboards_and_telemetry/metrics_exporting.md) for OpenTelemetry properties.
+

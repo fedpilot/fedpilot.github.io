@@ -1,3 +1,8 @@
+---
+title: Topology Adaptation Registry
+layout: default
+parent: Tool Registries
+---
 # Topology Adaptation Registry
 
 The Topology Adaptation Registry (`src/registries/topology_adaptation/topology_adaptation_registry.py`) is the **4th built-in plugin system**. It governs how the network graph *changes dynamically* over the course of a training run — for both single-cluster and ICRF multi-cluster deployments.
@@ -95,3 +100,4 @@ sequenceDiagram
 - **Curriculum learning**: Start with a dense graph and progressively sparsify as the model converges.
 
 See also: [Topology Registry](topology_registry.md) · [Inter-Cluster Ray Fabric (ICRF)](../federated_core/icrf.md)
+

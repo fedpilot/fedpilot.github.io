@@ -1,3 +1,8 @@
+---
+title: Metrics Exporting
+layout: default
+parent: Dashboards & Telemetry
+---
 # Metrics Exporting
 
 Deep visibility into the training process is non-negotiable for federated learning. FedPilot meticulously logs different classes of metrics and exports them for analysis.
@@ -28,3 +33,4 @@ Distributed tracing is achieved natively via OpenTelemetry.
 
 ### 3. Prometheus
 Metrics can be scraped via `prometheus_client` (configured in `prometheus.yaml`) for live dashboarding. The Prometheus container usually runs on port `9090`.
+

@@ -1,3 +1,8 @@
+---
+title: Model Registry
+layout: default
+parent: Tool Registries
+---
 # Model Registry & Datasets
 
 FedPilot abstracts data loading and model instantiation processes away from the core execution logic. All models and datasets are accessed via string-based keys defined in `config.yaml`, allowing researchers to swap architectures and datasets without altering a single line of training code.
@@ -84,3 +89,4 @@ class MyAutoencoder(nn.Module):
 The `app_factory.py` dynamically discovers and instantiates your model when the `VirtualNodes` materialize. You can pass the entire `config` object to your model to parameterize it dynamically (e.g., scaling layer sizes based on dataset choice).
 
 See also: [Ray & Virtual Nodes](../orchestration/ray_and_virtual_nodes.md) · [Configuration Reference](../entry_and_config/configuration_reference.md)
+

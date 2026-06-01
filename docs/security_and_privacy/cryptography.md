@@ -1,3 +1,8 @@
+---
+title: Cryptography
+layout: default
+parent: Security & Privacy
+---
 # Security & Privacy: Cryptography & Secure Aggregation
 
 While Differential Privacy adds statistical noise to protect individual data points, cryptographic techniques protect the model weights themselves from being read by man-in-the-middle attackers or a curious aggregation server.
@@ -99,3 +104,4 @@ encryption_method: "ckks"
 In this configuration, clients apply DP noise locally before encrypting — ensuring that even the aggregated plaintext reveals no individual.
 
 See also: [Differential Privacy](differential_privacy.md) · [Global Object Store](../orchestration/global_object_store.md) · [Schemas SDK](../schemas_and_apps/schemas_sdk.md)
+

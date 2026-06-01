@@ -1,3 +1,8 @@
+---
+title: Topology Registry
+layout: default
+parent: Tool Registries
+---
 # Topology Registry
 
 The Topology Registry (`src/registries/topologies/topology_registry.py`) manages all network graph builders. It decouples the mathematical definition of a network graph from the infrastructure that routes messages across it.
@@ -76,3 +81,4 @@ federated_learning_topology: "my_small_world"
 The system will call `build_topology()` which looks up your registered function automatically. No other framework files need to be modified.
 
 See also: [Topology Manager](../orchestration/topology_manager.md) · [Topology Adaptation Registry](topology_adaptation_registry.md)
+

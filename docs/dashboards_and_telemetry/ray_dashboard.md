@@ -1,3 +1,8 @@
+---
+title: Ray Dashboard
+layout: default
+parent: Dashboards & Telemetry
+---
 # Ray Dashboard
 
 While OpenTelemetry and Prometheus handle machine learning metrics (like Loss and Accuracy), the **Ray Dashboard** handles *Orchestration Metrics*.
@@ -18,3 +23,4 @@ Once the `make run` command executes, navigate to `http://localhost:8265` in you
 1. **Logical View**: See every `VirtualNode` actor spawned by `app_factory.py`. You can see their exact PID, IP address, and whether they are ALIVE, DEAD, or PENDING.
 2. **Logs**: You can click on individual actors to stream their exact `stdout`/`stderr`. This is vital if a specific edge device fails to load a dataset split.
 3. **Hardware Utilization**: View real-time CPU, RAM, and GPU memory utilization per actor, helping you tune your `train_batch_size` to prevent Out-Of-Memory (OOM) errors.
+

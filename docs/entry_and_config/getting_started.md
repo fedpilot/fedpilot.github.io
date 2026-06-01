@@ -1,3 +1,8 @@
+---
+title: Getting Started
+layout: default
+parent: Entry & Configuration
+---
 # Getting Started & CLI Reference
 
 FedPilot is designed to be highly accessible for both rapid local prototyping and heavy cluster deployment. You can interact with the framework via the terminal CLI (using the Makefile) or through a visual GUI.
@@ -84,3 +89,4 @@ $ make monitoring-up
 
 ## Further Development
 To start developing custom tools, look at the [Registries](../registries/model_registry.md). If you wish to build entirely new paradigms, study the [Schemas SDK](../schemas_and_apps/schemas_sdk.md).
+

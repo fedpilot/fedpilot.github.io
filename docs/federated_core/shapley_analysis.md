@@ -1,3 +1,8 @@
+---
+title: Shapley Analysis
+layout: default
+parent: Federated Core & Communication
+---
 # Shapley Value Analysis
 
 The Shapley Value Executor (`src/applications/shapley/`) extends standard centralized federated learning with a **fairness and contribution measurement** framework based on cooperative game theory.
@@ -69,3 +74,4 @@ The exact Shapley computation requires evaluating $v(S)$ for all $2^N$ subsets. 
 > For production-scale federations ($N > 20$), plan to extend the `ShapleyServerNode` with a Monte Carlo or kernel SHAP approximation plugged into the standard aggregation hook.
 
 See also: [Aggregators](aggregators.md) · [Applications & AppFactory](../schemas_and_apps/applications_and_appfactory.md) · [Metrics Registry](../registries/metrics_registry.md)
+

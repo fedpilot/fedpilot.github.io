@@ -1,3 +1,8 @@
+---
+title: Federated Base
+layout: default
+parent: Federated Core & Communication
+---
 # Federated Base Coordinator
 
 The `FederatedBase` class (`src/core/federated/federated_base.py`) is the invisible conductor of the entire local simulation. It owns the full lifecycle of a federated experiment: resource allocation, node materialization, round orchestration, and teardown.
@@ -84,3 +89,4 @@ The `FederatedBase` blocks on `ray.get()` until all in-flight futures resolve, t
 In **single-cluster** mode, `FederatedBase` uses the standard `TopologyManager` actor for routing. In **multi-cluster** (ICRF) mode, the `HybridTopologyManager` replaces it transparently — `FederatedBase` sees no difference. The same `train()` call works across one machine or across a continent-spanning data center federation.
 
 See also: [Ray & Virtual Nodes](../orchestration/ray_and_virtual_nodes.md) · [Inter-Cluster Ray Fabric (ICRF)](icrf.md)
+

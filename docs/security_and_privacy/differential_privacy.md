@@ -1,3 +1,8 @@
+---
+title: Differential Privacy
+layout: default
+parent: Security & Privacy
+---
 # Differential Privacy (DP-SGD)
 
 In Federated Learning, transmitting raw weights instead of raw data provides baseline privacy. However, sophisticated inference attacks can still reverse-engineer sensitive data directly from the gradients.
@@ -42,3 +47,4 @@ Before noise is added, gradients that are too large (which might uniquely identi
 If your model refuses to converge with DP enabled:
 1. **Diverging Loss**: Your `dp_noise_multiplier` is too high, or your `learning_rate` needs to be lowered to handle the noisy gradients.
 2. **Stagnant Accuracy**: The `dp_clipping_norm` might be too aggressive (e.g., `0.1`). Try relaxing it to `1.0` or `2.0` to allow the model to actually learn from the data.
+

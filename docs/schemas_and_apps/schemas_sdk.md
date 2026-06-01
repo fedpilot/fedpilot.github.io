@@ -1,3 +1,8 @@
+---
+title: Schemas Sdk
+layout: default
+parent: Schemas & Applications
+---
 # Schemas SDK
 
 FedPilot decouples *what* a node does (Schema) from *how* it is connected (Application) and *where* it runs (ICRF placement). Schemas live in `src/schemas/` and define the behavioral templates for federated learning paradigms.
@@ -108,3 +113,4 @@ The actual string values used in `config.yaml` map to Python constants as follow
 Hybrid mode is not activated by schema name — it is triggered automatically by the presence of `CLUSTER_0_ID` and `CLUSTER_ID` environment variables.
 
 See also: [Applications & AppFactory](applications_and_appfactory.md) · [Inter-Cluster Ray Fabric (ICRF)](../federated_core/icrf.md)
+

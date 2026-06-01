@@ -1,3 +1,8 @@
+---
+title: Deployment Guide
+layout: default
+parent: Dashboards & Telemetry
+---
 # Deployment Guide
 
 FedPilot is designed for robust deployment on Linux environments. While local development uses simulated Ray processes, production environments require physical network bridging.
@@ -28,3 +33,4 @@ A `docker-compose.yml` and `Dockerfile` are provided in the `deployment/` direct
 cd deployment/
 docker-compose up --build -d
 ```
+

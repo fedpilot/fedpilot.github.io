@@ -1,3 +1,8 @@
+---
+title: Icrf
+layout: default
+parent: Federated Core & Communication
+---
 # Inter-Cluster Ray Fabric (ICRF)
 
 The **Inter-Cluster Ray Fabric (ICRF)** is the core architectural primitive of FedPilot. It is a hybrid communication substrate that enables massive horizontal scaling by seamlessly switching underlying transport protocols based on physical node placement, while preserving a single logical federation graph.
@@ -137,3 +142,4 @@ export HYBRID_ASSIGNMENT_STRATEGY=locality
 | [Topology Adaptation Registry](../registries/topology_adaptation_registry.md) | Strategies for rewiring the ICRF between rounds |
 | [Applications & AppFactory](../schemas_and_apps/applications_and_appfactory.md) | ICRF activates via `hybrid_coordinator_executor` / `hybrid_worker_executor` |
 | [Federated Base](federated_base.md) | Manages node lifecycle and resource allocation |
+

@@ -1,3 +1,8 @@
+---
+title: Topology Manager
+layout: default
+parent: Orchestration & Infrastructure
+---
 # Topology Manager
 
 In a decentralized network, nodes cannot indiscriminately talk to every other node. They are bounded by a specific physical or logical graph. The `TopologyManager` (`src/core/communication/topology_manager.py`) is the Ray actor responsible for enforcing this graph in **single-cluster** experiments.
@@ -114,3 +119,4 @@ adjacency_matrix_file_name: null             # Path to a custom .csv adjacency m
 ```
 
 Custom topologies are registered via `@register_topology` in the [Topology Registry](../registries/topology_registry.md).
+

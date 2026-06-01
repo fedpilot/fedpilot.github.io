@@ -1,3 +1,8 @@
+---
+title: Streamlit Dashboard
+layout: default
+parent: Dashboards & Telemetry
+---
 # Streamlit FedPilot Dashboard
 
 The FedPilot framework ships with a custom-built, highly interactive Streamlit Dashboard located in the `fedpilot-dashboard/` directory.
@@ -33,3 +38,4 @@ Using the **Setup Experiment Modal**, you can edit every parameter of the platfo
    ```
 
 The dashboard will open automatically in your browser (usually at `http://localhost:8501`). It supports both Light and Dark themes (`styles/dark.css`) and features an interactive sidebar for filtering down to specific Virtual Nodes.
+

@@ -1,3 +1,8 @@
+---
+title: Applications And Appfactory
+layout: default
+parent: Schemas & Applications
+---
 # Applications & AppFactory
 
 While Schemas define *what* nodes do, **Applications** define the concrete execution pathways. Located in `src/applications/`, each application maps a Schema onto a specific Ray topology, resource layout, and node role configuration.
@@ -82,3 +87,4 @@ elif config.FEDERATED_LEARNING_SCHEMA == "MyCustomSchema":
 Your executor function receives the fully-validated `ConfigValidator` object and is responsible for building the `FederatedBase`, creating nodes, and running the training loop.
 
 See also: [Schemas SDK](schemas_sdk.md) · [Inter-Cluster Ray Fabric (ICRF)](../federated_core/icrf.md) · [Shapley Value Analysis](../federated_core/shapley_analysis.md)
+
