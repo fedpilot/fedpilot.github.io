@@ -4,132 +4,83 @@ layout: home
 nav_order: 1 
 ---
 
-# FedPilot Wiki
+![FedPilot Platform Logo]()
 
-Welcome to the **FedPilot** comprehensive documentation. FedPilot is a  Federated Learning framework designed for scalable, distributed machine learning with advanced features like clustering, differential privacy, and model pruning.
+# FedPilot: A Topology-Aware Platform for Federated Learning
 
----
+Welcome to the **FedPilot** documentation hub. FedPilot is a Ray-backed platform for topology-aware federated learning and distributed system research.
 
-## Documentation Structure
-
-
-Start here if you're new to FedPilot:
-
-| Document | Purpose | Time | Audience |
-|----------|---------|------|----------|
-| [overview]({{ site.baseurl }}/overview) | Introduction to FedPilot | 10 min | Beginner |
-| [Framework Overview]({{ site.baseurl }}/fedpilot-framework-overview) | FedPilot framework overview | 15 min | Beginner |
-| [Installation]({{ site.baseurl }}/requirements-and-installation) | Setup & environment configuration | 20 min | All |
-| [Getting Started]({{ site.baseurl }}/getting-started) | Quick start guide & first training | 15 min | All |
-| [CLI Reference]({{ site.baseurl }}/cli-reference) | Command-line interface guide | 10 min | Beginners |
-
-**Recommended Path for New Users:**
-1. Read: [Framework Overview]({{ site.baseurl }}/fedpilot-framework-overview) (understand what it is)
-2. Start: [Installation]({{ site.baseurl }}/requirements-and-installation) (set up environment)
-3. Follow: [Getting Started]({{ site.baseurl }}/getting-started) (run first model)
-4. Reference: [CLI Reference]({{ site.baseurl }}/cli-reference) (understand commands)
+Unlike traditional FL frameworks that hide low-level scheduling behind FL-specific abstractions, FedPilot's central design principle is to **decouple logical federation design from physical execution**. Researchers define schemas, virtual nodes, topology descriptors, and adaptation policies *before* the system materializes actors and placement groups.
 
 ---
 
-## Configuration & Reference
+## The Four Core Contributions
 
-Complete configuration guides:
+As outlined in the architectural design of the platform, FedPilot contributes four key systems-level innovations:
 
-| Document | Purpose | Use Case |
-|----------|---------|----------|
-| [Configuration Guide]({{ site.baseurl }}/configuration-guide) | YAML config reference & examples | Learning YAML format |
-| [CLI Reference]({{ site.baseurl }}/cli-reference) | Command-line interface guide | Learning how to create configurations |
-
----
-
-## Supported Features
-
-| Feature area            | Supported items |
-|---|---|
-| Architectures           | Centralized FL (Star Topology), Decentralized FL (Ring, K-connected), Custom Topologies |
-| Models                  | CNN, LeNet, ResNet (18, 50), VGG16, MobileNet, Vision Transformer (ViT), Swin, BERT, ALBERT, Custom models |
-| Datasets — Image        | MNIST, Fashion-MNIST, FEMNIST, CIFAR-10/100, SVHN, STL-10, Tiny ImageNet |
-| Datasets — Text         | Shakespeare, BBC News, Yahoo QA |
-| Optimization            | FedAvg, FedProx, Model pruning & compression, Parameter quantization, Gradient clipping, Enhanced chunking |
-| Security & Privacy      | Differential Privacy (DP), Gradient clipping, Secure aggregation, Client sampling |
-| Monitoring              | OpenTelemetry tracing, Prometheus metrics, Grafana dashboards, Jaeger distributed tracing |
-
-
+1. **Layered Architecture**: A clean separation of Schema, Core, Communication, Infrastructure, and Observability layers.
+2. **First-Class Systems Abstractions**: Lazy virtual-node materialization, topology-aware message routing, and the **Inter-Cluster Ray Fabric (ICRF)** as a core infrastructure primitive — not an optional add-on.
+3. **Data-Driven Topology Adaptation**: Data-driven clustering based on real label distributions drives ICRF placement decisions, unifying convergence improvement and horizontal scaling in one mechanism.
+4. **Grounded Observability**: A side-channel telemetry stack (OpenTelemetry, Prometheus, Grafana, Streamlit) that treats resource pressure and network I/O as critical experimental artifacts, not post-hoc add-ons.
 
 ---
 
-## Features & Guides
+## The Inter-Cluster Ray Fabric (ICRF)
 
-Learn about specific features:
+The ICRF is the spine of FedPilot's multi-cluster capability. It is a hybrid communication layer that maintains a single logical federation graph while automatically routing messages through:
 
-| Guide | Topic | Best For |
-|-------|-------|----------|
-| [Models & Datasets]({{ site.baseurl }}/guides/models-and-datasets) | Available models and data sources | Choosing model/dataset |
-| [Aggregation Strategies]({{ site.baseurl }}/guides/aggregation-strategies) | FedAvg, FedProx, variants | Understanding aggregation |
+- **Ray shared memory** — for nodes co-located on the same physical cluster (intra-cluster).
+- **HTTP via Ray Serve gateways** — for nodes spanning separate physical clusters (inter-cluster).
 
+Every part of the platform is aware of the ICRF: clustering determines its wiring, the `HybridAdjacencyMatrix` encodes its routing table, and the `HybridTopologyManager` enforces it at runtime.
 
----
-
-## Examples & Tutorials
-
-
-**By Use Case:**
-- First training -> Example 1 in [Basic Training]({{ site.baseurl }}/examples/basic-training)
-- Non-IID data -> Example 2 in [Basic Training]({{ site.baseurl }}/examples/basic-training)
-- Privacy-preserving -> Example 3 in [Basic Training]({{ site.baseurl }}/examples/basic-training)
-- Compression -> Example 4 in [Basic Training]({{ site.baseurl }}/examples/basic-training)
+→ Read the deep-dive: [**Inter-Cluster Ray Fabric (ICRF)**](federated_core/icrf.md)
 
 ---
 
-## Quick Reference Tables
+## Documentation Layers
 
-### Documentation by Topic
+To make the platform understandable, the architecture has been broken down into its operational layers. Choose a layer to dive into the technical details:
 
-| Topic | Primary Doc | Secondary Docs |
-|-------|-------------|-----------------|
-| **Installation** | [Installation]({{ site.baseurl }}/requirements-and-installation) | - |
-| **First Run** | [Getting Started]({{ site.baseurl }}/getting-started) | [CLI Reference]({{ site.baseurl }}/cli-reference) |
-| **Configuration** | [Configuration Guide]({{ site.baseurl }}/configuration-guide) | -
-| **Models** | [Models & Datasets]({{ site.baseurl }}/guides/models-and-datasets) | [Basic Examples]({{ site.baseurl }}/examples/basic-training) |
-| **Aggregation** | [Aggregation Strategies]({{ site.baseurl }}/guides/aggregation-strategies) | - |
-| **Examples** | [Basic Training]({{ site.baseurl }}/examples/basic-training) | - |
+### 1. Entry & Configuration
+Everything starts with how you boot up the framework.
+- [Getting Started: Running & Experimenting](entry_and_config/getting_started.md)
+- [Configuration Reference](entry_and_config/configuration_reference.md)
 
+### 2. Orchestration & Infrastructure
+How the framework scales across physical hardware using Ray.
+- [Ray & Virtual Nodes (Lazy Materialization)](orchestration/ray_and_virtual_nodes.md)
+- [Topology Manager](orchestration/topology_manager.md)
+- [Global Object Store](orchestration/global_object_store.md)
 
----
+### 3. Schemas & Applications
+How the federated paradigms are defined and mapped to execution engines.
+- [Schemas SDK](schemas_and_apps/schemas_sdk.md)
+- [Applications & AppFactory](schemas_and_apps/applications_and_appfactory.md)
 
-## Cross-References
+### 4. Federated Core & Communication
+The mathematical heart of the framework and the Inter-Cluster Ray Fabric.
+- [**Inter-Cluster Ray Fabric (ICRF)**](federated_core/icrf.md) ← *Start here for multi-cluster deployments*
+- [Federated Base](federated_core/federated_base.md)
+- [Aggregators](federated_core/aggregators.md)
+- [Model Compression & Chunking](federated_core/model_compression.md)
+- [Shapley Value Analysis](federated_core/shapley_analysis.md)
 
-### Common Questions & Answers
+### 5. Tool Registries
+How to inject custom logic without editing core files. The platform has four decorator-based plugin registries:
+- [Model Registry](registries/model_registry.md)
+- [Topology Registry](registries/topology_registry.md)
+- [Metrics Registry](registries/metrics_registry.md)
+- [Topology Adaptation Registry](registries/topology_adaptation_registry.md)
 
-| Question | Answer |
-|----------|--------|
-| "How do I install FedPilot?" | [Installation]({{ site.baseurl }}/requirements-and-installation) |
-| "How do I run my first training?" | [Getting Started]({{ site.baseurl }}/getting-started) |
-| "How do I use make commands?" | [CLI Reference]({{ site.baseurl }}/cli-reference) |
-| "How do I configure my experiment?" | [Configuration Guide]({{ site.baseurl }}/configuration-guide) |
-| "Which model should I use?" | [Models & Datasets]({{ site.baseurl }}/guides/models-and-datasets) |
-| "How does it work internally?" | [Framework Overview]({{ site.baseurl }}/fedpilot-framework-overview) |
+### 6. Security & Privacy
+Protecting distributed data from inference attacks.
+- [Differential Privacy](security_and_privacy/differential_privacy.md)
+- [Cryptography & Secure Aggregation](security_and_privacy/cryptography.md)
 
----
-
-## Getting Help
-
-### Troubleshooting
-
-1. **Installation Issues** -> [Installation Troubleshooting]({{ site.baseurl }}/requirements-and-installation#troubleshooting)
-2. **Training Issues** -> [Getting Started Troubleshooting]({{ site.baseurl }}/getting-started#troubleshooting)
-3. **Configuration Issues** -> [Configuration Guide]({{ site.baseurl }}/configuration-guide#configuration-validation)
-
----
-
-## Version Info
-
-- **FedPilot Version**: v2.0.0
-- **Documentation Version**: 1.0
-- **Last Updated**: 2024
-- **Status**: Active & Maintained
-
----
-**Ready to install FedPilot?** Check out
-[Requirements & Installation]({{ site.baseurl }}/requirements-and-installation)!
-{: .text-center }
+### 7. Dashboards & Telemetry
+Deep visibility into your experiments and production networks.
+- [Metrics Exporting](dashboards_and_telemetry/metrics_exporting.md)
+- [Ray Dashboard](dashboards_and_telemetry/ray_dashboard.md)
+- [Streamlit Dashboard](dashboards_and_telemetry/streamlit_dashboard.md)
+- [Deployment Guide](dashboards_and_telemetry/deployment_guide.md)
