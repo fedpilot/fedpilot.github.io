@@ -85,11 +85,49 @@ body.landing-page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-h);
-  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  gap: 0.75rem;
+  min-height: var(--header-h);
+  padding: 0.5rem clamp(1rem, 4vw, 2.5rem);
   background: rgba(6, 8, 15, 0.82);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(96, 165, 250, 0.08);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 1.15rem;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.landing-header.nav-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.landing-header.nav-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.landing-header.nav-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .brand {
@@ -653,19 +691,27 @@ body.landing-page {
   gap: 1rem;
 }
 
-.blog-list-link {
-  display: grid;
-  gap: 0.5rem;
+.blog-list-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
   padding: 1.35rem 1.5rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-panel);
-  text-decoration: none;
-  color: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.blog-list-link:hover {
+.blog-list-item:hover .blog-card {
   border-color: rgba(96, 165, 250, 0.45);
   box-shadow: 0 8px 32px rgba(59, 130, 246, 0.12);
 }
@@ -677,16 +723,38 @@ body.landing-page {
 }
 
 .blog-list-title {
+  margin: 0;
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.35;
+}
+
+.blog-list-title a {
   color: var(--text);
+  text-decoration: none;
+}
+
+.blog-list-title a:hover {
+  color: var(--accent);
 }
 
 .blog-list-excerpt {
+  margin: 0;
   font-size: 0.9375rem;
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+.blog-list-read {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.blog-list-read:hover {
+  text-decoration: underline;
 }
 
 /* Blog post reading layout — wide, comfortable measure */
@@ -889,9 +957,71 @@ body.landing-page {
   text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .landing-nav {
+    position: fixed;
+    top: var(--header-h);
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 1rem clamp(1rem, 4vw, 2.5rem) 1.25rem;
+    background: rgba(6, 8, 15, 0.97);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.22s ease,
+      opacity 0.22s ease,
+      visibility 0.22s ease;
+  }
+
+  .landing-header.nav-open .landing-nav {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .landing-nav .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  body.nav-menu-open {
+    overflow: hidden;
+  }
+
+  .brand-text {
+    font-size: 1rem;
+  }
+
+  .blog-card {
+    padding: 1.15rem 1.2rem;
+  }
+
+  .blog-list-title {
+    font-size: 1.05rem;
+  }
+}
+
 @media (max-width: 520px) {
-  .landing-nav .nav-link:not(.nav-link-cta) {
-    padding: 0.5rem 0.65rem;
-    font-size: 0.875rem;
+  .landing-footer nav {
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .landing-copyright {
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
 }

@@ -1,0 +1,20 @@
+<ul class="blog-list">
+  {% if site.posts.size == 0 %}
+  <li class="blog-list-empty">No posts published yet. Check back soon.</li>
+  {% endif %}
+  {% for post in site.posts %}
+  <li class="blog-list-item">
+    <article class="blog-card">
+      <time class="blog-list-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <h2 class="blog-list-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      {% assign card_excerpt = post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 160 %}
+      {% if card_excerpt != "" %}
+      <p class="blog-list-excerpt">{{ card_excerpt }}</p>
+      {% endif %}
+      <a class="blog-list-read" href="{{ post.url | relative_url }}">Read article →</a>
+    </article>
+  </li>
+  {% endfor %}
+</ul>

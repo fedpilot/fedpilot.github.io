@@ -15,17 +15,5 @@ nav_exclude: true
 </section>
 
 <section class="landing-section" id="posts">
-  <ul class="blog-list">
-    {% for post in site.posts %}
-    <li class="blog-list-item">
-      <a class="blog-list-link" href="{{ post.url | relative_url }}">
-        <time class="blog-list-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-        <span class="blog-list-title">{{ post.title }}</span>
-        {% if post.excerpt %}
-        <span class="blog-list-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</span>
-        {% endif %}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+  {% include blog-list.html %}
 </section>

@@ -11,7 +11,10 @@ mermaid:
 
 url: "https://fedpilot.github.io"
 baseurl: ""
-                  
+timezone: UTC
+future: true
+
+# Build all posts (avoids CI timezone skipping dated posts on deploy)
 
 plugins:
   - jekyll-redirect-from
