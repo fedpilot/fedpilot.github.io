@@ -1,86 +1,159 @@
 ---
-title: Home
-layout: home
-nav_order: 1 
+layout: landing
+title: FedPilot
+description: Topology-aware federated learning and distributed AI on Ray — decouple federation design from physical execution.
+nav_exclude: true
 ---
 
-![FedPilot Platform Logo]()
+<section class="landing-section landing-section--hero" id="top">
+  <img
+    class="hero-banner"
+    src="{{ '/assets/images/fedpilot_banner_160-90-px.png' | relative_url }}"
+    alt="FedPilot"
+    width="320"
+    height="180"
+  />
+  <p class="hero-eyebrow">Distributed & Trustworthy AI</p>
+  <h1 class="hero-title">
+     <span>Trustworthy AI</span> at Scale
+  </h1>
+  <p class="hero-lead">
+    FedPilot is a Ray-backed platform for topology-aware federated learning and Trustworthy AI research.
+    Define schemas, virtual nodes, and adaptation policies before the runtime materializes actors and placement groups.
+  </p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ '/docs/' | relative_url }}" target="_blank" rel="noopener noreferrer">Read the documentation</a>
+    <a class="btn btn-secondary" href="{{ '/contact/' | relative_url }}">Contact the team</a>
+  </div>
+</section>
 
-# FedPilot: A Topology-Aware Platform for Federated Learning
+<section class="landing-section" id="distributed-ai">
+  <p class="section-label">Distributed AI</p>
+  <h2 class="section-title">Train globally, keep data local</h2>
+  <p class="section-intro">
+    Federated learning coordinates model updates across clients without centralizing raw data — the foundation of privacy-preserving distributed AI.
+  </p>
+  <div class="distributed-ai-grid">
+    <div class="ai-pillar">
+      <strong>Cross-silo & cross-device</strong>
+      <span>Institutions to edge fleets</span>
+    </div>
+    <div class="ai-pillar">
+      <strong>Non-IID & heterogeneity</strong>
+      <span>FedProx, sampling, robust agg</span>
+    </div>
+    <div class="ai-pillar">
+      <strong>Vision & NLP models</strong>
+      <span>CNN, ResNet, BERT, custom PyTorch</span>
+    </div>
+    <div class="ai-pillar">
+      <strong>Privacy budgets</strong>
+      <span>DP-SGD, secure aggregation</span>
+    </div>
+  </div>
+</section>
 
-Welcome to the **FedPilot** documentation hub. FedPilot is a Ray-backed platform for topology-aware federated learning and distributed system research.
+<section class="landing-section" id="contributions">
+  <p class="section-label">Platform design</p>
+  <h2 class="section-title">Four core contributions</h2>
+  <p class="section-intro">
+    FedPilot treats distributed systems concerns as first-class — not hidden behind FL-only abstractions.
+  </p>
+  <div class="contributions-grid">
+    <article class="contribution-card">
+      <h3>Layered architecture</h3>
+      <p>Schema, core, communication, infrastructure, and observability layers stay cleanly separated.</p>
+    </article>
+    <article class="contribution-card">
+      <h3>Systems abstractions</h3>
+      <p>Lazy virtual-node materialization, topology-aware routing, and ICRF as a core primitive.</p>
+    </article>
+    <article class="contribution-card">
+      <h3>Topology adaptation</h3>
+      <p>Data-driven clustering from label distributions drives placement and horizontal scaling.</p>
+    </article>
+    <article class="contribution-card">
+      <h3>Grounded observability</h3>
+      <p>OpenTelemetry, Prometheus, Grafana, and Streamlit capture pressure and network I/O as experiment artifacts.</p>
+    </article>
+  </div>
+</section>
 
-Unlike traditional FL frameworks that hide low-level scheduling behind FL-specific abstractions, FedPilot's central design principle is to **decouple logical federation design from physical execution**. Researchers define schemas, virtual nodes, topology descriptors, and adaptation policies *before* the system materializes actors and placement groups.
+<section class="landing-section" id="icrf">
+  <p class="section-label">Distributed systems</p>
+  <h2 class="section-title">Inter-Cluster Ray Fabric (ICRF)</h2>
+  <div class="icrf-panel">
+    <p>
+      The ICRF is the spine of multi-cluster federation: one logical graph, hybrid transport chosen automatically per hop.
+    </p>
+    <div class="icrf-routes">
+      <span class="route-chip">Ray shared memory · intra-cluster</span>
+      <span class="route-chip">HTTP / Ray Serve · inter-cluster</span>
+    </div>
+    <p>
+      Clustering wires the fabric; <code>HybridAdjacencyMatrix</code> encodes routes; <code>HybridTopologyManager</code> enforces them at runtime.
+    </p>
+    <a class="btn btn-secondary" href="{{ '/federated_core/icrf/' | relative_url }}">ICRF deep-dive →</a>
+  </div>
+</section>
 
----
+<section class="landing-section" id="layers">
+  <p class="section-label">Documentation map</p>
+  <h2 class="section-title">Explore by operational layer</h2>
+  <p class="section-intro">
+    The docs mirror how FedPilot runs in production — from boot configuration through telemetry.
+  </p>
+  <div class="layers-grid">
+    <a class="layer-card" href="{{ '/entry_and_config/' | relative_url }}">
+      <span class="layer-num">01</span>
+      <h3>Entry &amp; Configuration</h3>
+      <p>Getting started, CLI usage, and the configuration reference.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/orchestration/' | relative_url }}">
+      <span class="layer-num">02</span>
+      <h3>Orchestration &amp; Infrastructure</h3>
+      <p>Ray virtual nodes, topology manager, and global object store.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/schemas_and_apps/' | relative_url }}">
+      <span class="layer-num">03</span>
+      <h3>Schemas &amp; Applications</h3>
+      <p>Schemas SDK and AppFactory for mapping paradigms to engines.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/federated_core/' | relative_url }}">
+      <span class="layer-num">04</span>
+      <h3>Federated Core &amp; Communication</h3>
+      <p>ICRF, FederatedBase, aggregators, compression, Shapley analysis.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/registries/' | relative_url }}">
+      <span class="layer-num">05</span>
+      <h3>Tool Registries</h3>
+      <p>Plugin registries for models, topology, metrics, and adaptation.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/security_and_privacy/' | relative_url }}">
+      <span class="layer-num">06</span>
+      <h3>Security &amp; Privacy</h3>
+      <p>Differential privacy and cryptography / secure aggregation.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+    <a class="layer-card" href="{{ '/dashboards_and_telemetry/' | relative_url }}">
+      <span class="layer-num">07</span>
+      <h3>Dashboards &amp; Telemetry</h3>
+      <p>Metrics export, Ray and Streamlit dashboards, deployment guide.</p>
+      <span class="layer-link">Open layer →</span>
+    </a>
+  </div>
+</section>
 
-## The Four Core Contributions
-
-As outlined in the architectural design of the platform, FedPilot contributes four key systems-level innovations:
-
-1. **Layered Architecture**: A clean separation of Schema, Core, Communication, Infrastructure, and Observability layers.
-2. **First-Class Systems Abstractions**: Lazy virtual-node materialization, topology-aware message routing, and the **Inter-Cluster Ray Fabric (ICRF)** as a core infrastructure primitive — not an optional add-on.
-3. **Data-Driven Topology Adaptation**: Data-driven clustering based on real label distributions drives ICRF placement decisions, unifying convergence improvement and horizontal scaling in one mechanism.
-4. **Grounded Observability**: A side-channel telemetry stack (OpenTelemetry, Prometheus, Grafana, Streamlit) that treats resource pressure and network I/O as critical experimental artifacts, not post-hoc add-ons.
-
----
-
-## The Inter-Cluster Ray Fabric (ICRF)
-
-The ICRF is the spine of FedPilot's multi-cluster capability. It is a hybrid communication layer that maintains a single logical federation graph while automatically routing messages through:
-
-- **Ray shared memory** — for nodes co-located on the same physical cluster (intra-cluster).
-- **HTTP via Ray Serve gateways** — for nodes spanning separate physical clusters (inter-cluster).
-
-Every part of the platform is aware of the ICRF: clustering determines its wiring, the `HybridAdjacencyMatrix` encodes its routing table, and the `HybridTopologyManager` enforces it at runtime.
-
-→ Read the deep-dive: [**Inter-Cluster Ray Fabric (ICRF)**](federated_core/icrf.md)
-
----
-
-## Documentation Layers
-
-To make the platform understandable, the architecture has been broken down into its operational layers. Choose a layer to dive into the technical details:
-
-### 1. Entry & Configuration
-Everything starts with how you boot up the framework.
-- [Getting Started: Running & Experimenting](entry_and_config/getting_started.md)
-- [Configuration Reference](entry_and_config/configuration_reference.md)
-
-### 2. Orchestration & Infrastructure
-How the framework scales across physical hardware using Ray.
-- [Ray & Virtual Nodes (Lazy Materialization)](orchestration/ray_and_virtual_nodes.md)
-- [Topology Manager](orchestration/topology_manager.md)
-- [Global Object Store](orchestration/global_object_store.md)
-
-### 3. Schemas & Applications
-How the federated paradigms are defined and mapped to execution engines.
-- [Schemas SDK](schemas_and_apps/schemas_sdk.md)
-- [Applications & AppFactory](schemas_and_apps/applications_and_appfactory.md)
-
-### 4. Federated Core & Communication
-The mathematical heart of the framework and the Inter-Cluster Ray Fabric.
-- [**Inter-Cluster Ray Fabric (ICRF)**](federated_core/icrf.md) ← *Start here for multi-cluster deployments*
-- [Federated Base](federated_core/federated_base.md)
-- [Aggregators](federated_core/aggregators.md)
-- [Model Compression & Chunking](federated_core/model_compression.md)
-- [Shapley Value Analysis](federated_core/shapley_analysis.md)
-
-### 5. Tool Registries
-How to inject custom logic without editing core files. The platform has four decorator-based plugin registries:
-- [Model Registry](registries/model_registry.md)
-- [Topology Registry](registries/topology_registry.md)
-- [Metrics Registry](registries/metrics_registry.md)
-- [Topology Adaptation Registry](registries/topology_adaptation_registry.md)
-
-### 6. Security & Privacy
-Protecting distributed data from inference attacks.
-- [Differential Privacy](security_and_privacy/differential_privacy.md)
-- [Cryptography & Secure Aggregation](security_and_privacy/cryptography.md)
-
-### 7. Dashboards & Telemetry
-Deep visibility into your experiments and production networks.
-- [Metrics Exporting](dashboards_and_telemetry/metrics_exporting.md)
-- [Ray Dashboard](dashboards_and_telemetry/ray_dashboard.md)
-- [Streamlit Dashboard](dashboards_and_telemetry/streamlit_dashboard.md)
-- [Deployment Guide](dashboards_and_telemetry/deployment_guide.md)
+<section class="cta-band">
+  <h2>Ready to run an experiment?</h2>
+  <p>Install FedPilot, configure a topology, and ship reproducible FL runs on a laptop or Ray cluster.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ '/entry_and_config/getting_started/' | relative_url }}">Getting started</a>
+    <a class="btn btn-secondary" href="{{ '/docs/' | relative_url }}" target="_blank" rel="noopener noreferrer">Full documentation hub</a>
+  </div>
+</section>

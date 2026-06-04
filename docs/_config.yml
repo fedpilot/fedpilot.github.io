@@ -2,6 +2,7 @@
 title: FedPilot Wiki
 description: Documentation for FedPilot
 logo: assets/images/fedpilot_logo.jpeg
+banner: assets/images/fedpilot_banner_160-90-px.png
 theme: just-the-docs
 color_scheme: light
 permalink: pretty
@@ -14,3 +15,11 @@ baseurl: ""
 
 plugins:
   - jekyll-redirect-from
+
+# Silence Sass deprecations from the just-the-docs theme (Dart Sass 3.x)
+sass:
+  quiet_deps: true
+  silence_deprecations:
+    - import
+    - global-builtin
+    - color-functions
