@@ -30,6 +30,7 @@
       <span class="brand-text">FedPilot</span>
     </a>
     <nav class="landing-nav" aria-label="Primary">
+      <a class="nav-link" href="{{ '/blog/' | relative_url }}">Blog</a>
       <a class="nav-link" href="{{ '/docs/' | relative_url }}" target="_blank" rel="noopener noreferrer">Documentation</a>
       <a class="nav-link nav-link-cta" href="{{ '/contact/' | relative_url }}">Contact</a>
     </nav>
@@ -42,10 +43,16 @@
   <footer class="landing-footer">
     <p>FedPilot — topology-aware federated learning on Ray</p>
     <nav aria-label="Footer">
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/docs/' | relative_url }}" target="_blank" rel="noopener noreferrer">Documentation</a>
       <a href="{{ '/contact/' | relative_url }}">Contact</a>
       <a href="https://github.com/fedpilot" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
+    <p class="landing-copyright">
+      <span class="copyright-symbol" aria-hidden="true">©</span>
+      {{ site.time | date: '%Y' }} All rights reserved.
+      <a href="https://fedpilot.ir" target="_blank" rel="noopener noreferrer">FedPilot.ir</a> team
+    </p>
   </footer>
 
   {% if page.load_team %}

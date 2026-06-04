@@ -1,0 +1,19 @@
+---
+layout: landing
+---
+<article class="blog-post">
+  <header class="blog-post-header">
+    <p class="hero-eyebrow">Blog</p>
+    <h1 class="blog-post-title">{{ page.title }}</h1>
+    <p class="blog-post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% if page.author %}<span class="blog-post-author">· {{ page.author }}</span>{% endif %}
+    </p>
+  </header>
+  <div class="blog-post-body">
+    {{ content }}
+  </div>
+  <p class="blog-back">
+    <a href="{{ '/blog/' | relative_url }}">← Back to blog</a>
+  </p>
+</article>
